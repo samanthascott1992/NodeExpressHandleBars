@@ -1,33 +1,30 @@
-var mysql = require("mysql");
+var express = require("express");
+var mysql = require("mysql")
+var exphbs = require("express-handlebars");
 
+var app = express();
+
+var PORT = process.env.PORT || 8080;
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 var connection;
 
-if (process.env.JAWSDB_URL) {
-
+if(process.env.JAWSDB_URL){
     connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-
+} else{
     connection = mysql.createConnection({
         host: "localhost",
-        port: 3306,
         user: "root",
         password: "root",
+        port: 3306,
         database: "burgers_db"
-
     });
-
 };
 
-    connection.connect(function (err) {
+connection.connect(err => {
+    if (err) throw err
+    console.log(`Connected to MySQL as id ${connection.threadId}`)
+})
 
-        if (err) {
-
-            console.error("error connecting: " + err.stack);
-            return;
-        }
-
-        console.log("Connected as id " + connection.threadId);
-
-    });
-
-    module.exports = connection;
+module.exports= connection
