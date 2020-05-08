@@ -25,18 +25,13 @@ create: function(name, cb) {
     ], cb);
 },
 
-update: function(id, cb) {
+update: function(value, cb) {
 
-    var condition = "id=" + id;
-    orm.update("burgers", {
+    orm.update(value, "burgers", {
 
         devoured: true
-    }, condition, cb);
+    }, cb);
 
-},
-
-delete: function(name, cb) {
-    orm.delete("burgers",name,cb);
 }
 
 };

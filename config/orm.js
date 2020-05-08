@@ -37,13 +37,13 @@ connection.query(queryString, function(err, result) {
 
         throw err;
     }
-
+    console.log(result);
     cb(result);
 })
 
 },
 
-create: function(table, cols, vals, cb) {
+create: function(table, cols, values, cb) {
 
 
     var queryString = "INSERT INTO " + table;
@@ -52,12 +52,12 @@ create: function(table, cols, vals, cb) {
     queryString += cols.toString();
     queryString += ") ";
     queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
+    queryString += printQuestionMarks(values.length);
     queryString += ") ";
 
     console.log(queryString);
 
-    connection.query(queryString, vals, function(err, result) {
+    connection.query(queryString, values, function(err, result) {
 
         if (err) {
 
@@ -68,15 +68,15 @@ create: function(table, cols, vals, cb) {
     })
 },
 
-update: function(table, objColVals, condition, cb) {
+update: function(id, table, objColValues, cb) {
 
     var queryString = "UPDATE " + table;
-
+    console.log(id);
     queryString += " SET ";
-    queryString += objToSql(objColVals);
+    queryString += objToSql(objColValues);
     queryString += " WHERE ";
-    queryString += condition;
-
+    queryString += "id='"+ id.burger_id +"';"
+    
     console.log(queryString);
 
     connection.query(queryString, function(err, result) {
@@ -90,16 +90,6 @@ update: function(table, objColVals, condition, cb) {
         cb(result);
     })
 
-},
-
-delete: function(table, name, cb) {
-    var queryString = "DELETE FROM " + table + " WHERE burger_name = " + name;
-    connection.query(queryString, function(err, result) {
-        if(err){
-            throw err;
-        }
-        cb(result);
-    })
 }
 
 
