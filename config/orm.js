@@ -70,26 +70,36 @@ create: function(table, cols, vals, cb) {
 
 update: function(table, objColVals, condition, cb) {
 
-var queryString = "UPDATE " + table;
+    var queryString = "UPDATE " + table;
 
-queryString += " SET ";
-queryString += objToSql(objColVals);
-queryString += " WHERE ";
-queryString += condition;
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
 
-console.log(queryString);
+    console.log(queryString);
 
-connection.query(queryString, function(err, result) {
+    connection.query(queryString, function(err, result) {
 
-    if (err) {
+        if (err) {
 
-        throw err;
+            throw err;
 
-    }
+        }
 
-    cb(result);
-})
+        cb(result);
+    })
 
+},
+
+delete: function(table, name, cb) {
+    var queryString = "DELETE FROM " + table + " WHERE burger_name = " + name;
+    connection.query(queryString, function(err, result) {
+        if(err){
+            throw err;
+        }
+        cb(result);
+    })
 }
 
 

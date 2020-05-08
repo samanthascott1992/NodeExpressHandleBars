@@ -33,6 +33,10 @@ update: function(id, cb) {
         devoured: true
     }, condition, cb);
 
+},
+
+delete: function(name, cb) {
+    orm.delete("burgers",name,cb);
 }
 
 };
