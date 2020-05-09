@@ -7,8 +7,7 @@ USE burgers_db;
 DROP TABLE if exists burgers;
 
 CREATE TABLE burgers (
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     burger_name VARCHAR(250) NOT NULL,
-    devoured BOOL DEFAULT FALSE,
-    PRIMARY KEY (id)
+    devoured BOOLEAN DEFAULT false
 );
